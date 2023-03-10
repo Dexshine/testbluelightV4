@@ -20,14 +20,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button bluelightBtn;
-        bluelightBtn = findViewById(R.id.startBtn);
+        Button startBtn;
+        startBtn = findViewById(R.id.startBtn);
+        Button stopBtn = findViewById(R.id.stopBtn);
         Context context = this;
         Intent intent = new Intent(this, BlueLightFilterService.class);
-        bluelightBtn.setOnClickListener(new View.OnClickListener() {
+        startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startService(intent);
+            }
+        });
+        stopBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopService(intent);
             }
         });
 

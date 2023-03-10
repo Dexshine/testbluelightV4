@@ -15,6 +15,8 @@ public class BlueLightFilterService extends Service {
     public BlueLightFilterService() {
     }
 
+    View overlayView;
+    WindowManager windowManager;
     @Override
     public void onCreate(){
         super.onCreate();
@@ -28,9 +30,10 @@ public class BlueLightFilterService extends Service {
             stopSelf();
         } else {
             //create a windowmanager instance
-            WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+            windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+//            WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
             //create a new view
-            View overlayView = new View(this);
+            overlayView = new View(this);
             //set the background color of the view to the desire color
             overlayView.setBackgroundColor(Color.argb(100,255,60,0));
             //set the layout parameters of the view
@@ -49,13 +52,12 @@ public class BlueLightFilterService extends Service {
         }
 
     }
-    //    @Override
-//    public void onDestroy(){
-//        super.onDestroy();
-//        if(overlayView != null){
-//            windowManager.removeView(overlayView);
-//        }
-//    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        windowManager.removeView(overlayView);
+
+    }
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
